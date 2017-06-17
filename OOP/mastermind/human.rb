@@ -1,12 +1,13 @@
+module HumanGuess
 class ComputerPlayer
    def initialize
      @human = HumanPlayer.new
      @game_board = GridsBoard.new
      @index = 12
+     @secret_balls = $colors.sample(1) + $colors.sample(1) + $colors.sample(1) + $colors.sample(1)
    end
 
    def human_guess_game
-     random_select
      @game_board.display_board
      12.times do
        @human.guess
@@ -18,36 +19,40 @@ class ComputerPlayer
        new_board
        @game_board.display_board
        if game_over?
-         exclose
-         @game_board.display_board
-         if check_win?
-           puts "You win!"
-         else
-           puts "Game over!"
-         end
          break
        end
+     end
+     exclose
+     @game_board.display_board
+     if check_win?
+       puts "You win!"
+     else
+       puts "Game over!"
      end
    end
 
    private
 
-   def random_select
-     @secret_balls = $colors.sample(4)
-   end
-
    def answer
      plus_qty = 0
+     minus_qty = 0
      @secret_balls.each_with_index{ |ball, index| plus_qty += 1 if ball == @human.pick[index] }
-     plus_qty
-     minus_qty = (@human.pick & @secret_balls).length
-     minus_qty = minus_qty - plus_qty
+     compare1 = @human.pick.shuffle
+     compare2 = @secret_balls.shuffle
+     compare1.each do |a|
+       index = compare2.find_index(a)
+       if index != nil
+         compare2.delete_at(index)
+       end
+     end
+     minus_qty = 4 - compare2.length - plus_qty
      space_qty = 4 - ( plus_qty + minus_qty )
      @minus_plus = "+"*plus_qty + "-"*minus_qty + " "*space_qty
    end
 
     def exclose
-      @game_board.board_account[0]=@secret_balls
+      @game_board.board_account[0] = @secret_balls
+      @game_board.board_account[0].push "    "
     end
 
     def new_board
@@ -73,10 +78,23 @@ class ComputerPlayer
     end
 end
 
+class HumanPlayer
+   attr_accessor :pick
+
+   def initialize
+      @pick = []
+   end
+
+   def guess
+     puts "Pick 4 color balls at a time, don't put anything between the balls"
+     @pick = gets.chomp.upcase.split('')
+   end
+end
+
 class GridsBoard
    attr_accessor :board_account
 
-   $colors=["R","B","Y","P","G","T","D","A"]
+   $colors=["R","B","Y","P","G","T"]
 
    def initialize
      empty_arr = [" "," "," "," ","    "]
@@ -96,23 +114,9 @@ class GridsBoard
       board = line + y + "    1    2    3    4   result:"
       system("cls")
       puts board.lines.map { |line| line.strip.center(50) }
-      puts "color choices: \nR:red; B:blue; Y:yellow; P:purple; G:green; T:tea; D:Dark grey; A:aqua"
+      puts "color choices: \nR:red; B:blue; Y:yellow; P:purple; G:green; T:tea"
       puts "result: \n(+):both color and position are correct\n(-):only color is correct"
     end
 end
 
-class HumanPlayer
-   attr_accessor :pick
-
-   def initialize
-      @pick = []
-   end
-
-   def guess
-     puts "Pick 4 color balls at a time, don't put anything between the balls"
-     @pick = gets.chomp.upcase.split('')
-   end
 end
-
-computer = ComputerPlayer.new
-computer.human_guess_game

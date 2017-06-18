@@ -15,14 +15,14 @@ class TicTacToe
 
   def playing
     display_board
-    while @played_grids < 10
+    while @played_grids < 9
       game_move(@current_player)
       win?(@current_player)
       break if @someone_win == true
       shift_player
     end
-    puts "you are even" if @someone_win==false
-    puts "the game is over"
+    puts "You are tie" if @someone_win==false
+    puts "The game is over."
   end
 
   private
@@ -48,6 +48,7 @@ class TicTacToe
   end
 
   def display_board
+    system("cls")
     line = "\n--------------\n"
     y = ""
     @board_num.each do |arr|
@@ -82,14 +83,16 @@ class Players
 end
 
 def run_the_game
-  puts "Welcome to the Tic Tac Toe game."
-  puts "You are the first player, you want to play X or O? \nInput X or O:"
+  system("cls")
+  puts "                        Tic Tac Toe"
+  puts "This game is played by two players."
+  puts "The first player can choose to play X or O. \nInput X or O:"
   player1 = gets.chomp.upcase
   while player1.downcase != "x" && player1.downcase != "o"
     puts "Ops, incorrect input. Please input x or o:"
     player1 = gets.chomp.upcase
   end
-  puts "first player, you chose to play #{ player1 }"
+  puts "First player, you chose to play #{ player1 }"
   player2 = player1.downcase == "x"? "O" : "X"
   puts "Well, the second player, you play #{ player2 }"
   first_player = Players.new(player1)
@@ -99,12 +102,12 @@ def run_the_game
 end
 
 run_the_game
-puts "do you want to play the game again?\nInput Yes or No:"
+puts "Do you want to play the game again?\nInput Yes or No:"
 reply = gets.chomp.downcase
 until reply == "yes" || reply == "no"
   puts "wrong input, please input again."
   reply = gets.chomp.downcase
-end  
+end
 case reply
 when "yes"
   run_the_game

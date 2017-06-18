@@ -3,7 +3,8 @@ class HumanPlayer
   attr_accessor :minus_plus
 
   def answer
-    puts "Input your answer, with +/- without space"
+    puts "Compare the four color balls on the screen."
+    puts "Input your answer with +/- without space, for example: +-- :"
     reply = gets.chomp.strip
     while reply.length > 4 || (reply.split('') - ["+","-"]).length > 0
       reply = gets.chomp.strip
@@ -24,37 +25,37 @@ class ComputerPlayer
   end
 
   def computer_guess
-    puts "color choices: \nR:red; B:blue; Y:yellow; P:purple; G:green; T:tea"
-    puts "pick 4 colors, write down on the paper so that you can easily compare"
-    puts "when you are ready, input OK"
+    @game_board.display_board
+    puts "pick 4 colors, write down on the paper so that you can easily compare."
+    puts "when you are ready, please input OK:"
     ready = gets.chomp.downcase
     until ready == "ok"
+      puts "Invalid input. Please try again:"
       ready = gets.chomp.downcase
     end
     random_guess
     game_move
     if game_over?
-      if check_win?
-        puts "The computer win!"
-      else
-      puts "Game over!"
-      end
+      p_result
       exit
     end
     11.times do
       guess2
       game_move
       if game_over?
-        if check_win?
-          puts "The computer win!"
-        else
-        puts "Game over!"
-        end
+        p_result
         break
       end
     end
   end
 
+  def p_result
+    if check_win?
+      puts "The computer wins!"
+    else
+    puts "Game over!"
+    end
+  end
 
   def game_move
     computer_board
@@ -125,7 +126,7 @@ class GridsBoard
 
    def initialize
      empty_arr = [" "," "," "," ","    "]
-     enclosed_seceret = ["?","?","?","?","++++"]
+     enclosed_seceret = ["?","?","?","?","    "]
      @board_account = []
      12.times { @board_account.push empty_arr }
      @board_account.unshift enclosed_seceret

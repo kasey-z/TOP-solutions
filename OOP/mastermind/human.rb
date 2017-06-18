@@ -25,7 +25,7 @@ class ComputerPlayer
      exclose
      @game_board.display_board
      if check_win?
-       puts "You win!"
+       puts "Congratulations! You win!"
      else
        puts "Game over!"
      end
@@ -86,8 +86,13 @@ class HumanPlayer
    end
 
    def guess
-     puts "Pick 4 color balls at a time, don't put anything between the balls"
+     puts "Pick 4 color balls at a time, don't put anything between the balls."
+     puts "For example: BYPG"
      @pick = gets.chomp.upcase.split('')
+     until @pick.length == 4 && @pick.all? { |a| $colors.include? a }
+       puts "Invalid input. Please choose four colors from R, B, Y, P, G and T:"
+       @pick = gets.chomp.upcase.split('')
+     end
    end
 end
 
@@ -98,7 +103,7 @@ class GridsBoard
 
    def initialize
      empty_arr = [" "," "," "," ","    "]
-     enclosed_seceret = ["?","?","?","?","++++"]
+     enclosed_seceret = ["?","?","?","?","    "]
      @board_account = []
      12.times { @board_account.push empty_arr }
      @board_account.unshift enclosed_seceret
@@ -114,7 +119,7 @@ class GridsBoard
       board = line + y + "    1    2    3    4   result:"
       system("cls")
       puts board.lines.map { |line| line.strip.center(50) }
-      puts "color choices: \nR:red; B:blue; Y:yellow; P:purple; G:green; T:tea"
+      puts "Color choices: \nR:red; B:blue; Y:yellow; P:purple; G:green; T:tea"
       puts "result: \n(+):both color and position are correct\n(-):only color is correct"
     end
 end

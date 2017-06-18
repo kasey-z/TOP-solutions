@@ -37,8 +37,8 @@ class ComputerPlayer
      plus_qty = 0
      minus_qty = 0
      @secret_balls.each_with_index{ |ball, index| plus_qty += 1 if ball == @human.pick[index] }
-     compare1 = @human.pick.shuffle
-     compare2 = @secret_balls.shuffle
+     compare1 = @human.pick.clone
+     compare2 = @secret_balls.clone
      compare1.each do |a|
        index = compare2.find_index(a)
        if index != nil

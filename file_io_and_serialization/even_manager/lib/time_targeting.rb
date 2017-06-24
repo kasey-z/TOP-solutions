@@ -20,5 +20,7 @@ sorted_day = sort_by_value_desc(week_hash)
 week = {'0':'Sunday','1':'Monday','2':'Tuesday','3':'Wednesday','4':'Thursday', '5':'Friday', '6':'Saturday'}
 weekday = (sorted_day[0][0]).to_s.to_sym
 
-puts "The peak registration hours are #{sorted_hour[0][0]}, #{sorted_hour[1][0]}, #{sorted_hour[2][0]}."
-puts "Most people registered on #{week[weekday]}"
+File.open('time_target_report.txt','w') do |file|
+file.puts "The peak registration hours are #{sorted_hour[0][0]}, #{sorted_hour[1][0]}, #{sorted_hour[2][0]}."
+file.puts "Most people registered on #{week[weekday]}."
+end

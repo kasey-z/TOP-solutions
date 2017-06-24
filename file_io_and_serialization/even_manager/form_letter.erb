@@ -21,5 +21,11 @@
     </tr>
     <% end %>
   </table>
+  <p>The phone number you registered is <%= "#{phone_number}" %></p>
+  <% if phone_number == 'invalid'%>
+  <p><%= "Please re-register your phone number"%></p>
+  <% end %>
+  <p>Any inquiry, please contact us at Tel: 111-111-1111.</p>
+    
 </body>
 </html>

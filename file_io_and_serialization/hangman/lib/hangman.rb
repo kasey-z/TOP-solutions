@@ -63,8 +63,8 @@ class Hangman
   def human_guess
     puts "Guess a letter from a to z:"
     @letter = gets.chomp.downcase
-    until @letter.length == 1 && ('a'..'z').include?(@letter)
-      puts "Invalid input."
+    until @letter.length == 1 && ('a'..'z').include?(@letter) && !(@miss + @correct).include?(@letter)
+      puts "Invalid input or you already tried that character."
       @letter = gets.chomp.downcase
     end
     @letter

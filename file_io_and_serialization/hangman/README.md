@@ -1,4 +1,4 @@
-#~Hangman~
+#Hangman
 
 This is a simple command line game called Hangman.
 

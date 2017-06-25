@@ -1,6 +1,13 @@
-#These are the two solutions for the Odin Project.
-#Course: Object Oriented Programming
-#--1. Tic tac toe game
-#--2. Mastermind board game
-#In side the mastermind dir, put those three docs in the same dir.
-#Ruby mastermind.rb
+# Tic tac toe game &  Mastermind board game
+
+Both games are play on the command line.
+
+Course: Object Oriented Programming
+
+- Tic tac toe game
+
+- Mastermind board game
+
+In side the mastermind dir, put those three docs in the same dir.
+
+$Ruby mastermind.rb

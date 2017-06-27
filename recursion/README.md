@@ -2,7 +2,7 @@
 - These two ruby files are the solutions for the Odin Project: recursion
 
 ## fibonacci.rb
-- takes a number and returns that many members of the fibonacci sequence.
+- takes a number and returns an array of that many of the fibonacci sequence.
 - method #fibs uses iteration for the solution
 - method #fibs_rec uses recursion for the solution
 

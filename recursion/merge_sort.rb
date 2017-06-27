@@ -19,4 +19,6 @@ def merge_sort(arr)
   end
 end
 
-p merge_sort([2,1,4,3,8,5,7])
+unsorted = []
+20.times { unsorted << rand(99) }
+p merge_sort(unsorted)

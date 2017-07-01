@@ -11,6 +11,7 @@ end
 # no repeat key-node, if there are same key element, the node will count += 1
 class BinaryTree
   attr_accessor :root
+
   def initialize
     @root = nil
   end
@@ -41,7 +42,6 @@ class BinaryTree
     while !queue.empty?
       node = queue.shift
       list[node.key] = node.count
-
       if data != node.key
         queue << node.left unless node.left.nil?
         queue << node.right unless node.right.nil?
@@ -49,9 +49,7 @@ class BinaryTree
         found_key = list
         break
       end
-
     end
-
     found_key
   end
 
@@ -62,7 +60,6 @@ class BinaryTree
     answer = nil
     list = {}
     current = @root
-
     until stack.empty? && current.nil?
 #left
       until current.nil?
@@ -75,13 +72,11 @@ class BinaryTree
       if current.key == data
         answer = list
         break
-      # right
+# right
       else
         current = current.right
       end
-
     end
-
     answer
   end
 
@@ -99,12 +94,9 @@ class BinaryTree
       else
         right = dfs_rec(data, node.right, list)
       end
-
     else
       return left
     end
-
   end
-
 
 end

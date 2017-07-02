@@ -50,13 +50,11 @@ class Graphs
   def add_vertex(key,neighbors)
     @vertices[key] = Vertex.new(key, neighbors)
   end
-
 # take in two coordinates, give an array of listed vertexs as result.
   def breadth_first_search(start, target)
     queue = [ @vertices[start] ]
     visited = []
     found_key = false
-
     until queue.empty?
       vertex = queue.shift
       if vertex.key == target
@@ -67,7 +65,6 @@ class Graphs
         vertex.neighbors.each { |key| queue << @vertices[key] unless visited.include?(@vertices[key])}
       end
     end
-
     found_key ? visited : nil
   end
 
@@ -78,13 +75,11 @@ class Graphs
     0.upto(7) { |a| 0.upto(7) { |b| all_coordinates << [a,b] } }
     all_coordinates
   end
-
 # from the BFS's result, iterately find out all the parent vertexs
   def find_moves(start, target)
     visited = breadth_first_search(start, target)
     moves = []
     find_coordinate = target
-
     visited.reverse.each do |vertex|
       vertex.neighbors.each do |coordinate|
         if coordinate == find_coordinate
@@ -93,19 +88,7 @@ class Graphs
         end
       end
     end
-
     moves.reverse << target
   end
 
-end
-
-# This class store moves and the player's input. Not necessary at this moment.
-class Knight
-  attr_accessor :start_square, :target_square, :moves
-
-  def initialize
-    @start_square = nil
-    @target_square = nil
-    @moves = []
-  end
 end

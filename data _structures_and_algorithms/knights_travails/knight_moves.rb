@@ -39,18 +39,13 @@ class Graphs
   def breadth_first_search(start, target)
     queue = [ @vertices[start] ]
     visited = []
-    found_key = false
     until queue.empty?
       vertex = queue.shift
-      if vertex.key == target
-        found_key = true
-        break
-      else
-        visited << vertex
-        vertex.neighbors.each { |key| queue << @vertices[key] unless visited.include?(@vertices[key])}
-      end
+      break if vertex.key == target
+      visited << vertex
+      vertex.neighbors.each { |key| queue << @vertices[key] unless visited.include?(@vertices[key])}
     end
-    found_key ? visited : nil
+    visited
   end
 
   def get_all_coordinates

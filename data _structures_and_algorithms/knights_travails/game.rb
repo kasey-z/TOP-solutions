@@ -7,4 +7,4 @@ def knight_moves
   result.each { |arr| p arr }
 end
 
-knight_moves
+knight_moves([3,3],[4,3])

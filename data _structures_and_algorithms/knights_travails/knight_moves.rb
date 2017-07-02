@@ -14,9 +14,6 @@ class Graphs
     @vertices = {}
     create_graph
   end
-
-  private
-
 #every coordinate 's all possible positons in one move as the vertex's neighbors
   def create_graph
     all_coordinates = get_all_coordinates
@@ -30,21 +27,9 @@ class Graphs
   def get_neighbor_arr(arr)
     x = arr[0]
     y = arr[1]
-    x1s = new_coordinate(x,1)
-    x2s = new_coordinate(x,2)
-    y1s = new_coordinate(y,1)
-    y2s = new_coordinate(y,2)
-    children_arr = (x_y_array(x1s, y2s) + x_y_array(x2s, y1s)).uniq
-  end
-
-  def new_coordinate(m,n)
-    arr = [m+n,m-n].select{ |a| (0..7).include?(a) }
-  end
-
-  def x_y_array(a, b)
-    children = []
-    a.each { |x| b.each { |y| children << [x,y] } }
-    children
+    neighbors_arr = [[x + 2, y - 1], [x + 2, y + 1], [x - 2, y - 1], [x - 2, y + 1],
+                     [x + 1, y - 2], [x + 1, y + 2], [x - 1, y - 2], [x - 1, y + 2]]
+    neighbors_arr = neighbors_arr.select { |arr| (0..7).include?(a[0]) && include?(a[1]) }
   end
 
   def add_vertex(key,neighbors)
@@ -67,8 +52,6 @@ class Graphs
     end
     found_key ? visited : nil
   end
-
-  public
 
   def get_all_coordinates
     all_coordinates = []

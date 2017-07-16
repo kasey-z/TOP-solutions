@@ -50,11 +50,7 @@ class ComputerPlayer
   end
 
   def p_result
-    if check_win?
-      puts "The computer wins!"
-    else
-    puts "Game over!"
-    end
+    puts  check_win? ? "The computer wins!" : "Game over!"
   end
 
   def game_move
@@ -75,16 +71,17 @@ class ComputerPlayer
     plus_qty = @human.minus_plus.scan("+").length
     color_cr_qty = minor_qty + plus_qty
     all_cr_qty=plus_qty
-    if color_cr_qty == 0
+    case color_cr_qty
+    when  0
       $colors = $colors - @pick
       random_guess
-    elsif color_cr_qty == 4
+    when  4
       @pick= @pick.sample(4)
-    elsif color_cr_qty == 3
+    when  3
       @pick= (@pick.sample(3) + $colors.sample(1)).sample(4)
-    elsif color_cr_qty == 2
+    when 2
       @pick= (@pick.sample(2) + $colors.sample(2)).sample(4)
-    elsif color_cr_qty == 1
+    when  1
       @pick= (@pick.sample(1) + $colors.sample(3)).sample(4)
     end
   end
@@ -103,20 +100,12 @@ class ComputerPlayer
   end
 
   def check_win?
-     if @human.minus_plus == "++++"
-       true
-     else
-       false
-     end
+    @human.minus_plus == "++++" ? true : false
+
   end
 
   def game_over?
-    if check_win? == true || @index < 1
-      true
-    else
-      false
-    end
-  end
+    (check_win? == true || @index < 1) ? true : false
 end
 
 class GridsBoard

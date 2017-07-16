@@ -11,24 +11,16 @@ class ComputerPlayer
      @game_board.display_board
      12.times do
        @human.guess
-       until @human.pick.all? {|a| $colors.include?(a)} && @human.pick.length == 4
-         @human.guess
-       end
+       @human.guess until @human.pick.all? {|a| $colors.include?(a)} && @human.pick.length == 4
        answer
        check_win?
        new_board
        @game_board.display_board
-       if game_over?
-         break
-       end
+       break if game_over?
      end
      exclose
      @game_board.display_board
-     if check_win?
-       puts "Congratulations! You win!"
-     else
-       puts "Game over!"
-     end
+     puts check_win? ? "Congratulations! You win!" : "Game over!"
    end
 
    private
@@ -41,9 +33,7 @@ class ComputerPlayer
      compare2 = @secret_balls.clone
      compare1.each do |a|
        index = compare2.find_index(a)
-       if index != nil
-         compare2.delete_at(index)
-       end
+       compare2.delete_at(index) if index != nil
      end
      minus_qty = 4 - compare2.length - plus_qty
      space_qty = 4 - ( plus_qty + minus_qty )
@@ -62,19 +52,11 @@ class ComputerPlayer
     end
 
     def check_win?
-       if @minus_plus == "++++"
-         true
-       else
-         false
-       end
+      @minus_plus == "++++" ? true : false
     end
 
     def game_over?
-      if check_win? == true || @index < 1
-        true
-      else
-        false
-      end
+      (check_win? == true || @index < 1) ? true : false
     end
 end
 

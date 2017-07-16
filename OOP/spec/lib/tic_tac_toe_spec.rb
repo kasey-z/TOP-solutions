@@ -3,8 +3,10 @@ require "tic_tac_toe.rb"
 require "stringio"
 
 describe TicTacToe do
-  let(:first_player) {Players.new('x')}
-  let(:second_player){Players.new('o')}
+  let(:input1){double('input1')}
+  let(:input2){double('input2')}
+  let(:first_player) {Players.new(input1)}
+  let(:second_player){Players.new(input2)}
   let(:game)         {TicTacToe.new(first_player, second_player)}
 
   describe "#win?" do

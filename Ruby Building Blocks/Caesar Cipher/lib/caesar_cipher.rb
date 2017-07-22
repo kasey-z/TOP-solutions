@@ -18,4 +18,4 @@ def caesar_cipher(string, num)
   newstring
 end
 
-puts caesar_cipher("What a string!", 5)
+caesar_cipher("What a string!", 5)
